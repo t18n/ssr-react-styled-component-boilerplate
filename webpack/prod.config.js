@@ -2,8 +2,6 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // eslint-disable-line
 const CompressionPlugin = require('compression-webpack-plugin');
 const baseConfig = require('./base.config.js');
@@ -14,43 +12,15 @@ module.exports = merge(baseConfig, {
   // Define Build output
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: '[name].[chunkhash].bundle.js',
+    filename: '[name].[hash].bundle.js',
   },
 
   module: {
     rules: [
-
-      // Compile sass/scss and change name to hash
-      {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              // If disable CSS Modular
-              // modules: false,
-
-              // If enable CSS Modular, hence hashing classNames
-              modules: true,
-              localIdentName: '[hash:base64:6]',
-            },
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      },
-
     ],
   },
 
   plugins: [
-    // Export CSS
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
-    }),
-
     // Create an interactive treemap visualization of the contents of all your bundles
     new BundleAnalyzerPlugin({
       analyzerMode: 'static', // In static mode single HTML file with bundle report will be generated
@@ -62,7 +32,7 @@ module.exports = merge(baseConfig, {
 
     // Compress
     new CompressionPlugin({
-      asset: 'compressed/[path].gz[query]',
+      // asset: 'compressed/[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
@@ -85,18 +55,6 @@ module.exports = merge(baseConfig, {
     },
 
     minimizer: [
-      // Minify CSS
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorPluginOptions: {
-          preset: [
-            'default',
-            {
-              discardComments: { removeAll: true },
-            },
-          ],
-        },
-      }),
-
       // Miniffy JS
       new UglifyJsPlugin({
         uglifyOptions: {

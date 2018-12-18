@@ -14,7 +14,6 @@ module.exports = {
   resolve: {
     alias: {
       Assets: path.resolve('src/assets/'),
-      Sass: path.resolve('src/sass/'),
       Includes: path.resolve('src/includes/'),
       Components: path.resolve('src/components/'),
       Containers: path.resolve('src/containers/'),
@@ -78,6 +77,14 @@ module.exports = {
     // Initiate html template
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
 
     // Copy all assets to dist folder
