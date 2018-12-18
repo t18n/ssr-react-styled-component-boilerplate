@@ -34,6 +34,7 @@
     "image-webpack-loader": "^4.3.1",
     "imagemin-mozjpeg": "^7.0.0",
     "imagemin-webpack-plugin": "^2.2.0",
+    "lint-staged": "^8.1.0",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.3",
     "optimize-css-assets-webpack-plugin": "^4.0.1",
@@ -52,6 +53,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },

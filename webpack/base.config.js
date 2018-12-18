@@ -9,7 +9,6 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 module.exports = {
   entry: {
     main: [
-      // '@babel/polyfill',
       './src/index.js'],
   },
   resolve: {
@@ -20,6 +19,9 @@ module.exports = {
       Components: path.resolve('src/components/'),
       Containers: path.resolve('src/containers/'),
     },
+  },
+  node: {
+    fs: 'empty',
   },
   module: {
     rules: [
