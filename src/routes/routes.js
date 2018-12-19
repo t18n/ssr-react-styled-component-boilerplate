@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
-import favicon from 'Assets/images/favicon.png';
+import favicon from 'assets/images/favicon.png';
 
-import Home from 'Containers/Home';
-import Login from 'Containers/Login';
-import NotFound404 from 'Containers/404';
+import Home from 'containers/Home';
+import Login from 'containers/Login';
+import NotFound404 from 'containers/404';
 
 // TODO: Add HOC Lazyloader using `react-loadable`. Wait for Babel 7 support release.
 // import { Home, Login, NotFound404 } from './lazyLoader'

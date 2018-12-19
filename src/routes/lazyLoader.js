@@ -1,17 +1,17 @@
-// import Loading from 'Components/Loading';
+// import Loading from 'components/Loading';
 // import Loadable from 'react-loadable';
 
 // export const Home = Loadable({
-//   loader: () => import('Containers/Home/Home'),
+//   loader: () => import('containers/Home/Home'),
 //   loading: Loading,
 // });
 
 // export const Login = Loadable({
-//   loader: () => import('Containers/Login/Login'),
+//   loader: () => import('containers/Login/Login'),
 //   loading: Loading,
 // });
 
 // export const NotFound404 = Loadable({
-//   loader: () => import('Containers/404/404'),
+//   loader: () => import('containers/404/404'),
 //   loading: Loading,
 // });

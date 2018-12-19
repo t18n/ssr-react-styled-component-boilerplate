@@ -17,6 +17,14 @@
       {
         "serverSideRequirePath": true
       }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src/"
+        ]
+      }
     ]
   ]
 }

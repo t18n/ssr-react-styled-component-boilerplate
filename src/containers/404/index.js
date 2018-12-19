@@ -1,5 +1,5 @@
 import React from 'react';
-import Img from 'Assets/photos/animals-1782013.svg';
+import Img from 'assets/photos/animals-1782013.svg';
 
 const NotFound404 = () => (
   <div>

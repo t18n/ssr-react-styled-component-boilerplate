@@ -11,14 +11,6 @@ module.exports = {
     main: [
       './src/index.js'],
   },
-  resolve: {
-    alias: {
-      Assets: path.resolve('src/assets/'),
-      Includes: path.resolve('src/includes/'),
-      Components: path.resolve('src/components/'),
-      Containers: path.resolve('src/containers/'),
-    },
-  },
   node: {
     fs: 'empty',
   },

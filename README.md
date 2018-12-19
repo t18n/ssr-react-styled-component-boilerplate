@@ -1,24 +1,21 @@
-## React Turbo Boilerplate
-
-Hey all,
-
-As I am getting more ad more comfortable working with `React` and `Webpack` over time, I see a need of having a boilerplate that is scalable, customizable and experimentable. The boilerplate that does not requires you to `eject` and panic seeing hundred of packages installed, bunch of advanced script written to serve all purposes. The boilerplate that allow you to understand easily, but powerful and embrace good practices and workflow, optimizing for production, and most of all, does not do any magic.
-
-I present you **React Turbo Boilerplate**
+## React TSCB
+**React TSCB** is an abbreviation of 'React Turbo's Styled-Component Boilerplate' to distinguise with others boilerplate implementations out there.
 
 ### Prerequisite
 1. Package manager: Preferably `yarn` but `npm` is also compatible
 2. `Node` >=8.9.0 - Use `nvm` if you want to use different `node` version
    
-### Specs
+### Technologies
+**React TSCB** is opinionated in using newest technologies in its stack. This boilerplate includes these technologies:
 1. `Webpack 4`
 2. `Babel 7`
-3. `SASS` / `SCSS`
+3. `Styled-Components`
 4. `React-router`
 5. `Props-type`
 6. `React-Helmet`
+7. `SSR` with `Express`
 
-### Features
+### Key Features
 1. SEO optimized
   * robots.txt
   * Auto generate sitemap
@@ -26,7 +23,7 @@ I present you **React Turbo Boilerplate**
   * Social media sharing optimized
 2. Easy development experience with hot-loader
 3. Add `Polyfill` automatically to browser (This is redundant since Babel 7)
-4. Automatically resolve stastic path (like `Assets/images/img.png` instead of `../../assets/images/img.png`)
+4. Automatically resolve stastic path (like `assets/images/img.png` instead of `../../assets/images/img.png`)
 5. `SASS` / `SCSS` compiler (easy to customize predecesor of your own with `LESS`, `Stylus`... using the same format)
 6. `CSS` bundle with option to easily hash className with CSS module
 7. Uglify `CSS`, `JS`
@@ -37,7 +34,7 @@ I present you **React Turbo Boilerplate**
 12. Lazy-loading enabled
 
 ### Get started
-*React Turbo Boilerplate* using  Component Container architecture, which help you to manage `stateful` and `stateless` component yet making it super flexible.
+*React Turbo Boilerplate* using  Component-Container architecture, which help you to manage `stateful` and `stateless` component yet making it super flexible.
 1. Know the structure
   * `/src/components` -> Where holds all dummies components and components stylesheets. Preferrably stateless
   * `/src/containers` -> Where holds all smart components and **NO** components stylesheets. Supposably for React classes with data manipulation ability
