@@ -1,12 +1,13 @@
-const Markup = ({ body, data }) => `
+const Markup = ({ body, routeData, styles }) => `
   <!DOCTYPE html>
   <html>
     <head>
       <title>React SSR</title>
+      ${styles}
     </head>
-    <body style="margin:0">
+    <body>
       <div id="app">${body}</div>
-      <script>window.__ROUTE_DATA__ = ${data}</script></body>
+      <script>window.ROUTE_LOADED_DATA=${routeData}</script>
     </body>
   </html>
 `;

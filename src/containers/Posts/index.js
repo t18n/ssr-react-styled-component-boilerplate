@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import loadData from 'helpers/loadData';
 
+import Header from 'components/Header';
+
 class Posts extends React.Component {
   constructor(props) {
     super(props);
@@ -15,11 +17,11 @@ class Posts extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
-      if (window.__ROUTE_DATA__) {
+      if (window.ROUTE_LOADED_DATA) {
         this.setState({
-          data: window.__ROUTE_DATA__,
+          data: window.ROUTE_LOADED_DATA,
         });
-        delete window.__ROUTE_DATA__;
+        delete window.ROUTE_LOADED_DATA;
       } else {
         loadData('posts').then((data) => {
           this.setState({
@@ -32,7 +34,12 @@ class Posts extends React.Component {
 
   render() {
     const { data } = this.state;
-    return <ul>{data.map(post => <li key={post.id}>{post.title}</li>)}</ul>;
+    return (
+      <React.Fragment>
+        <Header />
+        <ul>{data.map(post => <li key={post.id}>{post.title}</li>)}</ul>
+      </React.Fragment>
+    );
   }
 }
 

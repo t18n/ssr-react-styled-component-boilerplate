@@ -1,20 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
-import styledNormalize from 'styled-normalize';
 
-const Globalize = createGlobalStyle`
-  /* Inject normalize.css globally */
-  ${styledNormalize}
-
-  /* GT America Font */
+const GlobalizeStyle = createGlobalStyle`
+  /* Load Fonts */
   @font-face {
-    font-family: 'GT-America-Expanded-Black';
-    src: url('/static/fonts/GT-America-Expanded-Black.ttf');
-    font-weight: bold;
-    font-style: normal;
+    font-family: ${props => props.theme.fonts.headline};
+    src: url('https://fonts.googleapis.com/css?family=Alegreya+Sans:500&amp;subset=latin-ext,vietnamese');
+    font-display: auto;
   }
 
-  /* Roboto Font */
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+  @font-face {
+    font-family: ${props => props.theme.fonts.body};
+    src: url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&amp;subset=latin-ext,vietnamese');
+    font-display: auto;
+  }
 
   *, *:after, *:before {
     -webkit-box-sizing: border-box;
@@ -24,11 +22,11 @@ const Globalize = createGlobalStyle`
 
   html {
     height: 100%;
+    line-height: 1.15; 
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    font-size: 16px;
-    line-height: 20px;
     font-family: ${props => props.theme.fonts.body};
     color: ${props => props.theme.colors.black};
     margin: 0;
@@ -36,43 +34,179 @@ const Globalize = createGlobalStyle`
     width: 100%;
     height: 100%;
     text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
-  a, button, input, select, textarea {
-      -webkit-tap-highlight-color: transparent;
+  h1, h2, h3, h4 {
+    font-family: ${props => props.theme.fonts.headline};
   }
 
-  #__next {
-    width: 100%;
-    height: 100%;
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
   }
 
-  button {
-    background: none;
-    border: none;
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
   }
 
-  button:focus {
-    outline: 0;
+  pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
   }
+
 
   a {
-    cursor: pointer;
-    text-decoration: none;
-    color: ${props => props.theme.colors.linkColor};
+    background-color: transparent;
   }
 
-  a:hover {
+  abbr[title] {
+    border-bottom: none;
     text-decoration: underline;
+    text-decoration: underline dotted;
   }
 
-  @media ${props => props.theme.breakpoints.maxTabletSmall} {
-    .no-sroll--mobile-only {
-      overflow: hidden;
-    }
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  img {
+    border-style: none;
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  button,
+  input {
+    overflow: visible;
+  }
+
+  button,
+  select {
+    text-transform: none;
+  }
+
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    -webkit-appearance: button;
+  }
+
+  button::-moz-focus-inner,
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+
+  button:-moz-focusring,
+  [type="button"]:-moz-focusring,
+  [type="reset"]:-moz-focusring,
+  [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+
+  fieldset {
+    padding: 0.35em 0.75em 0.625em;
+  }
+
+  legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+  }
+
+  progress {
+    vertical-align: baseline;
+  }
+
+  textarea {
+    overflow: auto;
+  }
+
+  [type="checkbox"],
+  [type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  [type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+  }
+
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+  }
+
+  details {
+    display: block;
+  }
+
+  summary {
+    display: list-item;
+  }
+
+  template {
+    display: none;
+  }
+
+  [hidden] {
+    display: none;
   }
 `;
 
-export default Globalize;
+export default GlobalizeStyle;

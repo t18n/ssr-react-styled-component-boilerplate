@@ -15,7 +15,7 @@ import { RedirectWithStatus } from 'components/SSR';
 // import { Home, Login, NotFound404 } from './lazyLoader'
 
 const router = () => (
-  <div>
+  <React.Fragment>
     <Helmet>
       <link rel="icon" type="image/png" href={favicon} />
     </Helmet>
@@ -32,8 +32,9 @@ const router = () => (
 
       {/* If url is not defined, go 404 */}
       <Route component={NotFound404} />
+
     </Switch>
-  </div>
+  </React.Fragment>
 );
 
 export default router;

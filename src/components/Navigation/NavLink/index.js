@@ -4,28 +4,27 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
-const NavLink = ({ to, underline, ...rest }) => (
-  <StyledNavLink to={to} underline={underline} {...rest} />
+const NavLink = ({ to, ...rest }) => (
+  <StyledNavLink to={to} {...rest} />
 );
 
 const StyledNavLink = styled(Link)`
   justify-content: center;
   align-items: center;
-  text-decoration: none;
   cursor: pointer;
   display: ${props => props.display};
-  text-decoration: ${props => (props.underline ? 'underline' : 'none')};
+  text-decoration: ${props => props.underline};
 `;
 
 NavLink.defaultProps = {
   display: 'inline',
-  underline: false,
+  underline: 'none',
 };
 
 NavLink.propTypes = {
   to: PropTypes.string.isRequired,
   display: PropTypes.string,
-  underline: PropTypes.bool,
+  underline: PropTypes.string,
 };
 
 export default NavLink;

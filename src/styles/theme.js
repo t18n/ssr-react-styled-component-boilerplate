@@ -22,7 +22,7 @@ theme.colors = {
 theme.fonts = {
   brand: 'Baumans',
   headline: '\'Alegreya Sans\', \'sans- serif\'',
-  body: '\'Open Sans\', \'sans-serif\'',
+  body: '\'Roboto\', \'sans-serif\'',
 };
 
 // Breakpoint for Mobile first design

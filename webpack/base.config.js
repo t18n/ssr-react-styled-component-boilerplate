@@ -49,19 +49,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              // Not compile our ES6 modules to CommonJs modules.
-              // Allow ES6 imports/exports to do tree-shaking
-              [
-                '@babel/preset-env', {
-                  modules: false,
-                }],
-            ],
-          },
-        },
+        use: ['babel-loader', 'eslint-loader'],
       },
 
       // Encode imgs files using the Base64 encoding.

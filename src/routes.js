@@ -5,11 +5,11 @@ import Posts from 'containers/Posts';
 
 import loadData from 'helpers/loadData';
 
-const Routes = [
+const routes = [
   { path: '/', exact: true, component: Home },
   { path: '/login', component: Login },
   { path: '/posts', component: Posts, loadData: () => loadData('posts') },
   { component: NotFound404 },
 ];
 
-export default Routes;
+export default routes;

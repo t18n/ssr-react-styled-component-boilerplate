@@ -5,23 +5,31 @@ import serialize from 'serialize-javascript';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 
-import Routes from 'routes';
+import routes from 'routes';
+
+import { ThemeProvider, ServerStyleSheet } from 'styled-components';
+import GlobalizeStyle from 'styles/global-styles';
+import theme from 'styles/theme';
 
 import App from 'components/App';
 import Markup from 'template';
 
 const PORT = process.env.PORT || 3003;
-
 const app = express();
 
 app.use(express.static('../dist'));
 
 app.get('/*', (req, res) => {
   // Match current route and check if loadData is required
-  const currentRoute = Routes.find(route => matchPath(req.url, route)) || {};
+  const currentRoute = routes.find(route => matchPath(req.url, route)) || {};
   const promise = (currentRoute.loadData) ? currentRoute.loadData() : Promise.resolve(null);
 
   promise.then((data) => {
+    // Prepare out stylesheets and apply to DOM
+    const stylesheet = new ServerStyleSheet();
+    const styles = stylesheet.getStyleTags(); // Get all the tags from the sheet
+
+    // Prepare data
     const context = { data };
     const routeData = serialize(data);
 
@@ -34,26 +42,25 @@ app.get('/*', (req, res) => {
       // We pass in the `context` for needed information to use in the page
       // and  requested url from the server so the routes can match
       <StaticRouter context={context} location={req.url}>
-        <App />
+        <ThemeProvider theme={theme}>
+          <React.Fragment>
+            <GlobalizeStyle />
+            <App />
+          </React.Fragment>
+        </ThemeProvider>
       </StaticRouter>,
     );
 
     // https://reacttraining.com/react-router/web/guides/server-rendering
     if (context.url) {
-      // Somewhere a `<Redirect>` was rendered
-      return res.redirect(context.status, context.url);
+      // Expecting <Redirect /> component defined somewhere inside switch
+      res.redirect(context.status, context.url);
     }
     // Sends the HTTP response.
-    return res.send(
-      Markup({
-        body,
-        routeData,
-      }),
-    );
-
-
-    // if (context.status === 404) res.status(404);
-    // if (context.url) return res.redirect(301, context.url);
+    res.send(Markup({ body, styles, routeData }));
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(501);
   });
 });
 
