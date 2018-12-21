@@ -1,19 +1,11 @@
 const merge = require('webpack-merge');
-const path = require('path');
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // eslint-disable-line
 const CompressionPlugin = require('compression-webpack-plugin');
 const baseConfig = require('./base.config.js');
 
-
 module.exports = merge(baseConfig, {
-
-  // Define Build output
-  output: {
-    path: path.join(__dirname, '../dist'),
-    filename: '[name].[hash].bundle.js',
-  },
 
   module: {
     rules: [
@@ -24,7 +16,7 @@ module.exports = merge(baseConfig, {
     // Create an interactive treemap visualization of the contents of all your bundles
     new BundleAnalyzerPlugin({
       analyzerMode: 'static', // In static mode single HTML file with bundle report will be generated
-      openAnalyzer: true, // Automatically open report in default browser.
+      openAnalyzer: false, // Automatically open report in default browser.
       reportFilename: 'report/report.html',
       generateStatsFile: true,
       statsFilename: 'report/stats.json',

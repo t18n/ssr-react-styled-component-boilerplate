@@ -1,6 +1,14 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-// import { createGlobalStyle } from 'styled-components';
-import Router from './routes/routes';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDom.render(<Router />, document.getElementById('root'));
+import App from 'components/App';
+
+// **Attach** a React element into the **existing markup** via supplied container
+// hydrate() is same as render(), but is used to hydrate (attach event listeners) a container
+ReactDOM.hydrate(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root'),
+);

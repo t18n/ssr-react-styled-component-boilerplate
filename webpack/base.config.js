@@ -1,19 +1,47 @@
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
 module.exports = {
-  entry: {
+  // Compile for usage in a Node.js-like environment and load chunks
+  // Do not touch any built in modules like fs or path
+  target: 'node',
+
+  // Omit the files from node_modules in the bundle
+  // because the server can access these files directly
+  externals: [nodeExternals()],
+
+  // Define entry point
+  entry:
+  {
     main: [
-      './src/index.js'],
+      // Define server as an entry for SSR
+      path.resolve(__dirname, '../src/server/index.js'),
+    ],
   },
+
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    // filename: '[name].[hash].bundle.js',
+    // filename: '[name].bundle.js'
+    filename: 'index.js',
+  },
+
   node: {
+    // Provide an empty object for FS
     fs: 'empty',
   },
+
+  // Configurate webpack-dev-server
+  devServer: {
+    port: 3003,
+  },
+
   module: {
     rules: [
 
@@ -44,20 +72,20 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            // Images larger than 25 KB won’t be inlined
-            limit: 100 * 1024,
+            // Images larger than 12 KB won’t be inlined
+            limit: 12 * 1024,
           },
         },
       },
 
       // Encode svg files using the URL encoding
-      // Keep limits below 15kb
+      // Keep limits below 12kb
       // Example: Error page
       {
         test: /\.svg$/,
         loader: 'svg-url-loader',
         options: {
-          limit: 100 * 1024,
+          limit: 12 * 1024,
           noquotes: true,
         },
       },
@@ -65,26 +93,12 @@ module.exports = {
     ],
   },
   plugins: [
-
-    // Initiate html template
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
-    }),
+    new FriendlyErrorsWebpackPlugin(),
 
     // Copy all assets to dist folder
     new CopyWebpackPlugin([
-      { from: 'src/assets/images', to: 'assets/images' },
-      { from: 'src/assets/photos', to: 'assets/photos' },
-      { from: 'src/config/sitemap.xml', to: 'sitemap.xml' },
-      { from: 'src/config/robots.txt', to: 'robots.txt' },
+      { from: 'src/assets', to: 'assets' },
+      { from: 'src/config/*', to: '.', flatten: true }, // Cp all files from config and `flatten` to dest without directories
     ]),
 
     // Optimmize images
@@ -99,8 +113,7 @@ module.exports = {
       pngquant: { quality: '65-70', speed: 4 },
       svgo: { removeViewBox: false },
       jpegtran: null,
-      plugins: [imageminMozjpeg({ quality: 50 })],
+      plugins: [imageminMozjpeg({ quality: 80 })],
     }),
-
   ],
 };

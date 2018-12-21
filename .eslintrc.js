@@ -14,6 +14,27 @@ module.exports = {
   "extends": "airbnb", //Use Airbnb style guide
 
   "rules": {
+    // Allow reassign params
+    "no-param-reassign": [
+      "error", 
+      { 
+        "props": false 
+      }
+    ],
+    
+    // Allow Underscore dangle
+    "no-underscore-dangle": [
+      2, 
+      {
+        "allow": [
+          "__ROUTE_DATA__",
+        ],
+        "allowAfterThis": true, // e.g. this._bar is accepted
+        "allowAfterSuper": true, // e.g. super._bar() is accepted
+      }
+    ],
+
+    // Allow js + jsx file name extension
     "react/jsx-filename-extension": [
       1, 
       { 
@@ -21,6 +42,7 @@ module.exports = {
       }
     ],
 
+    // Allow console.log inside component
     "no-console": "off",
   },
 

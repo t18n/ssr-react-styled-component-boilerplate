@@ -1,12 +1,12 @@
 import React from 'react';
-import Img from 'assets/photos/animals-1782013.svg';
+import { HttpStatus } from 'components/SSR';
 
 const NotFound404 = () => (
-  <div>
-    <h1>
-      <img alt="" src={Img} width="500" />
-      Too bad, page not found
-    </h1>
-  </div>
+  <HttpStatus httpStatus={404}>
+    <div>
+      <h1>Oops, nothing here!</h1>
+    </div>
+  </HttpStatus>
 );
+
 export default NotFound404;
