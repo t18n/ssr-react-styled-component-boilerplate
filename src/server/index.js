@@ -17,6 +17,7 @@ const app = express();
 app.use(express.static('../dist'));
 
 app.get('/*', (req, res) => {
+  // Match current route and check if loadData is required
   const currentRoute = Routes.find(route => matchPath(req.url, route)) || {};
   const promise = (currentRoute.loadData) ? currentRoute.loadData() : Promise.resolve(null);
 

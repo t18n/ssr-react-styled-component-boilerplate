@@ -8,15 +8,9 @@ class Posts extends React.Component {
 
     // Check if staticContext exists
     // because it will be undefined if rendered through a BrowserRouter
-    if (props.staticContext && props.staticContext.data) {
-      this.state = {
-        data: props.staticContext.data,
-      };
-    } else {
-      this.state = {
-        data: [],
-      };
-    }
+    this.state = (props.staticContext && props.staticContext.data) ? {
+      data: props.staticContext.data,
+    } : { data: [] };
   }
 
   componentDidMount() {
@@ -38,7 +32,7 @@ class Posts extends React.Component {
 
   render() {
     const { data } = this.state;
-    return <ul>{data.map(todo => <li key={todo.id}>{todo.title}</li>)}</ul>;
+    return <ul>{data.map(post => <li key={post.id}>{post.title}</li>)}</ul>;
   }
 }
 

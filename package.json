@@ -8,16 +8,12 @@
   "scripts": {
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-
     "clean": "rm -rf `find dist/* | grep -v 'assets'`",
     "rebuild": "rm -rf `find dist/* | grep -v 'assets'` && webpack --mode production --config webpack/prod.config.js",
-    
     "prod:build": "webpack --mode production --config webpack/prod.config.js --watch",
     "prod:start": "nodemon ./dist/index.js",
-
     "dev:build": "webpack --mode development --config webpack/dev.config.js --watch",
     "dev:start": "nodemon ./dist/index.js",
-
     "serve:dev": "npm-run-all --parallel dev:*",
     "serve:prod": "npm-run-all --parallel prod:*"
   },
@@ -64,6 +60,7 @@
     "react-router-dom": "^4.3.1",
     "serialize-javascript": "^1.5.0",
     "styled-components": "^4.1.3",
+    "styled-normalize": "^8.0.4",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack-merge": "^4.1.4",
     "webpack-node-externals": "^1.7.2",

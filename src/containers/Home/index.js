@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'components/Navigation';
 
 import Welcome from 'components/Welcome';
 
 const Home = () => (
   <React.Fragment>
     <Welcome message="Welcome here :)" />
-    <Link to="/login">Login</Link>
-    <Link to="/404">404</Link>
-    <Link to="/posts">Posts</Link>
+    <NavLink to="/login">Login</NavLink>
+    <NavLink to="/404">404</NavLink>
+    <NavLink to="/posts">Posts</NavLink>
   </React.Fragment>
 );
 
