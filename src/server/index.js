@@ -2,7 +2,7 @@ import '@babel/polyfill';
 
 import React from 'react';
 import express from 'express';
-// import chalk from 'chalk';
+import chalk from 'chalk';
 import path from 'path';
 
 import serialize from 'serialize-javascript';
@@ -17,9 +17,11 @@ import AppBody from 'components/AppBody';
 const PORT = process.env.PORT || 3003;
 const app = express();
 
+// const testError = () => { throw (new Error('This is a Test error')); };
+
 app.use(express.static('../dist'));
 
-app.get('/*', (req, res) => {
+app.get('/*', (req, res, next) => {
   // Match current route and check if loadData is required
   const currentRoute = routes.find(route => matchPath(req.url, route)) || {};
   const promise = (currentRoute.loadData) ? currentRoute.loadData() : Promise.resolve(null);
@@ -53,10 +55,21 @@ app.get('/*', (req, res) => {
 
     // Sends the HTTP response.
     res.send(Markup({ body, styles, routeData }));
-  }).catch((error) => {
-    console.log(error);
-    res.sendStatus(501);
-  });
+  })
+    // https://www.bennadel.com/blog/3275-you-can-continue-to-process-an-express-js-request-after-the-client-response-has-been-sent.htm
+    // At this point, the CLIENT RESPONSE has been sent; but, that doesn't mean
+    // that the Express.js request has completed. We can continue to process the
+    // request, handling ASYNCHRONOUS aspects of the the client's request.
+    // --
+    // CAUTION: Since we're serializing the calls, essentially, it means that an
+    // error in one will likely prevent the next one from being invoked. As such,
+    // this approach may not always be appropriate.
+    // .then(enqueueSomething)
+    // .then(testError)
+    // If we hook all of this into the next() callback, it means that all of our
+    // errors can be handled by the global error handler - even errors that occur
+    // after the response has been sent to the client.
+    .catch(next);
 });
 
 // SEO
@@ -72,23 +85,18 @@ app.get('/robots.txt', (req, res) => (
 ));
 
 // Setup the Express global error handler.
-// app.use((error, request, response, next) => {
-//     console.log(chalk.red.bold("ERROR"));
-//     console.log(chalk.red.bold("====="));
-//     console.log(error);
+app.use((err, req, res) => {
+  console.log(chalk.red.bold(`ERROR \n===== \n${err}`));
 
-//     // Because we hooking post-response processing into the global error handler, we
-//     // get to leverage unified logging and error handling; but, it means the response
-//     // may have already been committed, since we don't know if the error was thrown
-//     // PRE or POST response. As such, we have to check to see if the response has
-//     // been committed before we attempt to send anything to the user.
-//     if (!response.headersSent) {
-//       response
-//         .status(500)
-//         .send("Sorry - something went wrong. We're digging into it.");
-//     }
-//   }
-// );
+  // Because we hooking post-response processing into the global error handler, we
+  // get to leverage unified logging and error handling; but, it means the response
+  // may have already been committed, since we don't know if the error was thrown
+  // PRE or POST response. As such, we have to check to see if the response has
+  // been committed before we attempt to send anything to the user.
+  if (!res.headersSent) {
+    res.status(500).send('Sorry - something went wrong. We\'re digging into it.');
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`😎 Server is listening on port ${PORT}`);
