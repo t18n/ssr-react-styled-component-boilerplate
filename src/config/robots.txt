@@ -1,4 +1,7 @@
-User-agent: *
-Disallow:
+# Rule 1
+User-agent: Googlebot
+Disallow: /nogooglebot/
 
-Sitemap: https://example.com/sitemap.txt
+# Rule 2
+User-agent: *
+Allow: /

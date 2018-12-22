@@ -1,17 +1,11 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "loose": true
-      }
-    ],
+    "@babel/preset-env",
     "@babel/preset-react"
   ],
   "plugins": [
     "inline-dotenv",
     "@babel/plugin-proposal-class-properties",
-    
     "@babel/plugin-proposal-object-rest-spread",
     [
       "babel-plugin-styled-components",

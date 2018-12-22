@@ -21,7 +21,7 @@ theme.colors = {
 // Font family
 theme.fonts = {
   brand: 'Baumans',
-  headline: '\'Alegreya Sans\', \'sans- serif\'',
+  headline: '\'Alegreya Sans\', \'Times\', \'Georgia\'',
   body: '\'Roboto\', \'sans-serif\'',
 };
 

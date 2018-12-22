@@ -5,13 +5,13 @@ const GlobalizeStyle = createGlobalStyle`
   @font-face {
     font-family: ${props => props.theme.fonts.headline};
     src: url('https://fonts.googleapis.com/css?family=Alegreya+Sans:500&amp;subset=latin-ext,vietnamese');
-    font-display: auto;
+    font-display: block;
   }
 
   @font-face {
     font-family: ${props => props.theme.fonts.body};
     src: url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&amp;subset=latin-ext,vietnamese');
-    font-display: auto;
+    font-display: block;
   }
 
   *, *:after, *:before {
