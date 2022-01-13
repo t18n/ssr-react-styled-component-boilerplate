@@ -19,7 +19,7 @@ const Welcome = styled.div`
 `;
 
 Component.defaultProps = {
-  appName: 'React Turbo Styled Component Boilerplate',
+  appName: 'React SSR Styled Component Boilerplate',
   message: 'welcome',
 };
 

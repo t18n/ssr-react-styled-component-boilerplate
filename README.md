@@ -1,5 +1,5 @@
-## React TSCB
-**React TSCB** is an abbreviation of 'React Turbo's Styled-Component Boilerplate' to distinguise with others boilerplate implementations out there.
+## SSR-React-Styled-Component
+An implementation of styled-components with SSR React
 
 ### Prerequisite
 1. Package manager: Preferably `yarn` but `npm` is also compatible
@@ -34,7 +34,7 @@
 12. Lazy-loading enabled
 
 ### Get started
-*React Turbo Boilerplate* using  Component-Container architecture, which help you to manage `stateful` and `stateless` component yet making it super flexible.
+This repo is using  Component-Container architecture, which help you to manage `stateful` and `stateless` component yet making it super flexible.
 1. Know the structure
   * `/src/components` -> Where holds all dummies components and components stylesheets. Preferrably stateless
   * `/src/containers` -> Where holds all smart components and **NO** components stylesheets. Supposably for React classes with data manipulation ability
