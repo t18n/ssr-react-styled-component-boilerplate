@@ -51,7 +51,7 @@
     "chalk": "^2.4.1",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^4.5.2",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-webpack-plugin": "^2.2.0",
